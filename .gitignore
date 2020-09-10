@@ -1,0 +1,16 @@
+Charge.Activity.Service.Actions/bin/
+Charge.Activity.Service.Actions/obj
+Charge.Activity.Service.Bussines/bin/
+Charge.Activity.Service.Bussines/obj/
+Charge.Activity.Service.Repository/bin/
+Charge.Activity.Service.Repository/obj/
+Charge.Activity.Service/bin/
+Charge.Activity.Service/obj/
+Test/Charge.Activity.Service.Action.Test/bin/
+Test/Charge.Activity.Service.Action.Test/obj/
+Test/Charge.Activity.Service.Bussines.Test/bin/
+Test/Charge.Activity.Service.Bussines.Test/obj/
+Test/Charge.Activity.Service.Repository.Test/bin/
+Test/Charge.Activity.Service.Repository.Test/obj/
+Test/Charge.Activity.Service.Controller.Test/bin/
+Test/Charge.Activity.Service.Controller.Test/obj/
