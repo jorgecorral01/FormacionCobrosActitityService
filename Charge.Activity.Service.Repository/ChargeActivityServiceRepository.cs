@@ -9,7 +9,7 @@ namespace Charge.Activity.Service.Repository {
         public ChargeActivityServiceRepository() {
         }
 
-        public ChargeActivityServiceRepository(ChargesContext chargesContext) {
+        public ChargeActivityServiceRepository(Charge.Repository.Service.Repository.Entity.Models.ChargesContext chargesContext) {
             ChargesContext = chargesContext;
         }
 

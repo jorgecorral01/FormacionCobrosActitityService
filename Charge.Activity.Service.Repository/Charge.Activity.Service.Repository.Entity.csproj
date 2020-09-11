@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FormacionCobros\ChargeRepositoryService\Charge.Repository.Service.Repository.Entity\Charge.Repository.Service.Repository.Entity.csproj" />
+    <ProjectReference Include="..\..\FormacionCobrosChargeRepositoryService\Charge.Repository.Service.Repository.Entity\Charge.Repository.Service.Repository.Entity.csproj" />
     <ProjectReference Include="..\Charge.Activity.Service.Bussines\Charge.Activity.Service.Bussines.csproj" />
   </ItemGroup>
 
