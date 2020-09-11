@@ -1,4 +1,5 @@
 ﻿using Charge.Activity.Service.Bussines.Dtos;
+using Charge.Activity.Service.Bussines.Interfaces;
 using Charge.Activity.Service.Repository;
 using Charge.Activity.Service.Repository.Entity;
 using System;

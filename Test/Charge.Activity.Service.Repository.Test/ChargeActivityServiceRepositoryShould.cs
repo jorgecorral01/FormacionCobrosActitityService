@@ -1,5 +1,5 @@
 using Charge.Activity.Service.Bussines.Dtos;
-using Charge.Repository.Service.Repository.Entity.Models;
+using Charge.Activity.Service.Repository.Entity.Models;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;

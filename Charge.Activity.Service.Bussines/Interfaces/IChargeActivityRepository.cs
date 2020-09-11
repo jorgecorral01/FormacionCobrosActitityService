@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Charge.Activity.Service.Repository.Entity {
+namespace Charge.Activity.Service.Bussines.Interfaces {
     public interface IChargeActivityRepository {
         bool Add(string identifier);
 

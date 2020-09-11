@@ -1,6 +1,6 @@
 ﻿using Charge.Activity.Service.Bussines.Dtos;
-using Charge.Activity.Service.Repository.Entity;
-using Charge.Repository.Service.Repository.Entity.Models;
+using Charge.Activity.Service.Bussines.Interfaces;
+using Charge.Activity.Service.Repository.Entity.Models;
 using System;
 using System.Linq;
 
@@ -9,7 +9,7 @@ namespace Charge.Activity.Service.Repository {
         public ChargeActivityServiceRepository() {
         }
 
-        public ChargeActivityServiceRepository(Charge.Repository.Service.Repository.Entity.Models.ChargesContext chargesContext) {
+        public ChargeActivityServiceRepository(ChargesContext chargesContext) {
             ChargesContext = chargesContext;
         }
 
