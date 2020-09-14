@@ -18,7 +18,7 @@ FROM build AS publish
 
 RUN dotnet publish "Charge.Activity.Service/Charge.Activity.Service.csproj" -c Release -o /app
 
-# Build runtime image
+# Build runtime image 
 FROM base as final
 WORKDIR /app
 COPY --from=publish /app .
