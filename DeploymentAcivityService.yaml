@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: activityservice
+  name: activityservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: activityservice
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: activityservice
+    spec:
+      containers:
+      - image: jorgecorral/activitiservice:latest
+        imagePullPolicy: "IfNotPresent"
+        name: activityservice
+        ports:
+          - containerPort: 80        
+        resources: {}      
+status: {}
