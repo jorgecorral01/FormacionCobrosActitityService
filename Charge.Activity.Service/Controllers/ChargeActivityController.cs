@@ -13,13 +13,17 @@ namespace Charge.Activity.Service.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public partial class ChargeActivityController : ControllerBase {
+
+        private readonly ActionFactory actionFactory;
         private readonly RepositoriesFactory repositoriesFactory;
+
 
         public static void Convention(ApiVersioningOptions options) {
             options.Conventions.Controller<ChargeActivityController>().HasApiVersions(ApiVersioning.Versions());
         }
 
-        public ChargeActivityController(RepositoriesFactory repositoriesFactory) {
+        public ChargeActivityController(ActionFactory actionFactory, RepositoriesFactory repositoriesFactory) {
+            this.actionFactory = actionFactory;
             this.repositoriesFactory = repositoriesFactory;
         }
         [Route("add")]
@@ -35,7 +39,7 @@ namespace Charge.Activity.Service.Controllers {
         [Route("update")]
         [HttpPut]
         public ActionResult Put(IdentifierDto identifier) {
-            if(ActionFactory.GetUpdateActivityAction(repositoriesFactory).Execute(identifier)) {             
+            if(actionFactory.GetUpdateActivityAction().Execute(identifier)) {             
                 return Ok();
             }
             throw new Exception("TODO");            

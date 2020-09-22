@@ -15,7 +15,7 @@ namespace Charge.Activity.Service.Action {
             this.chargeActivityServiceRepository = chargeActivityServiceRepository;
         }
 
-        public bool Execute(IdentifierDto identifierDto) {            
+        public virtual bool Execute(IdentifierDto identifierDto) {            
             return chargeActivityServiceRepository.Update(identifierDto); ;
         }
     }

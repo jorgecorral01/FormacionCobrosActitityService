@@ -1,6 +1,10 @@
+using Charge.Activity.Service.Action;
 using Charge.Activity.Service.Bussines.Dtos;
+using Charge.Activity.Service.Controller.Test.mocks;
 using FluentAssertions;
+using Microsoft.AspNetCore.Razor.Language;
 using Newtonsoft.Json;
+using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Net;
@@ -10,17 +14,19 @@ using System.Threading.Tasks;
 using static Charge.Activity.Service.Controllers.ChargeActivityController;
 
 namespace Charge.Activity.Service.Controller.Test {
+    [TestFixture]
     public class ChargeActivityServiceControllerShould {
         private HttpClient client;
         private IdentifierDto identifier;
        [SetUp]
         public void Setup() {
-            client = new HttpClient();
+            client = TestFixture.HttpClient;
             identifier = new IdentifierDto { identifier = "any identifier", AddResult = true };
         }
 
         [Test]
-        public async Task given_an_identifier_add_new_activity_charge_we_obtein_an_ok_response() {            
+        public async Task given_an_identifier_add_new_activity_charge_we_obtein_an_ok_response() {    
+            
             var requestUri = "http://localhost:10002/api/ChargeActivity/add";            
             var content = GivenAHttpContent(identifier, requestUri);
 
@@ -33,10 +39,14 @@ namespace Charge.Activity.Service.Controller.Test {
         public async Task given_an_identifier_for_update_activity_charge_we_obtein_an_ok_response() {           
             var requestUri = "http://localhost:10002/api/ChargeActivity/update";            
             var content = GivenAHttpContent(identifier, requestUri);
+            UpdateActivityAction action = Substitute.For<UpdateActivityAction>(new object[] { null } );
+            ActionsFactoryMock.CreateUpdateActivityAction(action);
+            action.Execute(Arg.Is<IdentifierDto>(Item => Item.identifier == identifier.identifier && Item.AddResult == identifier.AddResult)).Returns(true);
 
             var result = await client.PutAsync(requestUri, content);
 
-            result.StatusCode.Should().Be(HttpStatusCode.OK);
+            result.StatusCode.Should().Be(HttpStatusCode.OK);            
+            action.Received(1).Execute(Arg.Is<IdentifierDto>(Item => Item.identifier == identifier.identifier && Item.AddResult == identifier.AddResult));
         }
 
         private static HttpContent GivenAHttpContent(IdentifierDto identifierDto, string requestUri) {            

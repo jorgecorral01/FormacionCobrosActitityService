@@ -33,8 +33,9 @@ namespace Charge.Activity.Service {
             ConfigureMvc(services);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<ChargesContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("SqlFormacion")));
-            services.AddSingleton(new RepositoriesFactory());
+                options.UseSqlServer(Configuration.GetConnectionString("SqlFormacion")));
+            services.AddSingleton(new RepositoriesFactory(new ChargesContext()));
+            services.AddSingleton(new ActionFactory(new RepositoriesFactory(new ChargesContext())));
             ConfigureSwagger(services);
         }
 

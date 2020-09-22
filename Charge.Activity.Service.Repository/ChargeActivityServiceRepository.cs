@@ -6,14 +6,15 @@ using System.Linq;
 
 namespace Charge.Activity.Service.Repository {
     public class ChargeActivityServiceRepository : IChargeActivityRepository {
+
+        public ChargesContext ChargesContext { get; }
+
         public ChargeActivityServiceRepository() {
         }
 
         public ChargeActivityServiceRepository(ChargesContext chargesContext) {
             ChargesContext = chargesContext;
-        }
-
-        public ChargesContext ChargesContext { get; }
+        }              
 
         public bool Add(string identifier) {
             ChargesContext.Activities.Add(new Activities { Identifier = identifier });

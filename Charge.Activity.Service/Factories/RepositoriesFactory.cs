@@ -6,8 +6,12 @@ using System;
 
 namespace Charge.Activity.Service.Factories {
     public class RepositoriesFactory {
+        ChargesContext chargesContext;
+        public RepositoriesFactory (ChargesContext chargesContext) {
+            this.chargesContext = chargesContext;
+        }
         public IChargeActivityRepository GetRespository() {            
-            return new ChargeActivityServiceRepository(new ChargesContext());
+            return new ChargeActivityServiceRepository(chargesContext);
         }        
     }
 }
