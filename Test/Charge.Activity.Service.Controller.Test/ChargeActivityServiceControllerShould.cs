@@ -26,13 +26,12 @@ namespace Charge.Activity.Service.Controller.Test {
         }
 
         [Test]
-        public async Task given_an_identifier_add_new_activity_charge_we_obtein_an_ok_response() {    
-            
-            var requestUri = "http://localhost:10002/api/ChargeActivity/add";            
+        public async Task given_an_identifier_add_new_activity_charge_we_obtein_an_ok_response() {
+            var requestUri = "http://localhost:10002/api/ChargeActivity/add";
             var content = GivenAHttpContent(identifier, requestUri);
-            IChargeActivityRepository repository = Substitute.For<IChargeActivityRepository>();
+            IChargeActivityRepository repository = GivenArepositoryMock();
             RepositoriesFactoryMock.CreateAddRepository(repository);
-            repository.Add(identifier.identifier).Returns(true);
+            ReturnTrueForRepository(repository);
 
             var result = await client.PostAsync(requestUri, content);
 
@@ -41,17 +40,25 @@ namespace Charge.Activity.Service.Controller.Test {
         }
 
         [Test]
-        public async Task given_an_identifier_for_update_activity_charge_we_obtein_an_ok_response() {           
-            var requestUri = "http://localhost:10002/api/ChargeActivity/update";            
+        public async Task given_an_identifier_for_update_activity_charge_we_obtein_an_ok_response() {
+            var requestUri = "http://localhost:10002/api/ChargeActivity/update";
             var content = GivenAHttpContent(identifier, requestUri);
-            UpdateActivityAction action = Substitute.For<UpdateActivityAction>(new object[] { null } );
+            UpdateActivityAction action = GivenAnUpdateActivityActionMock();
             ActionsFactoryMock.CreateUpdateActivityAction(action);
-            action.Execute(Arg.Is<IdentifierDto>(Item => Item.identifier == identifier.identifier && Item.AddResult == identifier.AddResult)).Returns(true);
+            ReturnTrueForActivityActionMock(action);
 
             var result = await client.PutAsync(requestUri, content);
 
-            result.StatusCode.Should().Be(HttpStatusCode.OK);            
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
             action.Received(1).Execute(Arg.Is<IdentifierDto>(Item => Item.identifier == identifier.identifier && Item.AddResult == identifier.AddResult));
+        }
+
+        private void ReturnTrueForActivityActionMock(UpdateActivityAction action) {
+            action.Execute(Arg.Is<IdentifierDto>(Item => Item.identifier == identifier.identifier && Item.AddResult == identifier.AddResult)).Returns(true);
+        }
+
+        private static UpdateActivityAction GivenAnUpdateActivityActionMock() {
+            return Substitute.For<UpdateActivityAction>(new object[] { null });
         }
 
         private static HttpContent GivenAHttpContent(IdentifierDto identifierDto, string requestUri) {            
@@ -63,6 +70,12 @@ namespace Charge.Activity.Service.Controller.Test {
                 Content = content
             };
             return content;
+        }
+        private void ReturnTrueForRepository(IChargeActivityRepository repository) {
+            repository.Add(identifier.identifier).Returns(true);
+        }
+        private static IChargeActivityRepository GivenArepositoryMock() {
+            return Substitute.For<IChargeActivityRepository>();
         }
     }
 }
