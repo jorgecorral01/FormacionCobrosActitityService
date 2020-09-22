@@ -7,10 +7,11 @@ using System;
 namespace Charge.Activity.Service.Factories {
     public class RepositoriesFactory {
         ChargesContext chargesContext;
+        public RepositoriesFactory() {}
         public RepositoriesFactory (ChargesContext chargesContext) {
             this.chargesContext = chargesContext;
         }
-        public IChargeActivityRepository GetRespository() {            
+        public virtual IChargeActivityRepository GetRespository() {            
             return new ChargeActivityServiceRepository(chargesContext);
         }        
     }

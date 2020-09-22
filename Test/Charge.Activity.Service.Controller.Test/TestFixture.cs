@@ -41,6 +41,7 @@ namespace Charge.Activity.Service.Controller.Test {
                     //        Convert.ToBoolean(Configuration["IdentityServerConfig:RequireHttpsMetadata"]);
                     //});                                        
                     services.AddSingleton(ActionsFactoryMock.Instance);
+                    services.AddSingleton(RepositoriesFactoryMock.Instance);
                 })
                 .UseStartup<Startup>();
 

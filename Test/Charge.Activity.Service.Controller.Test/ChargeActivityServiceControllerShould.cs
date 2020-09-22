@@ -1,5 +1,6 @@
 using Charge.Activity.Service.Action;
 using Charge.Activity.Service.Bussines.Dtos;
+using Charge.Activity.Service.Bussines.Interfaces;
 using Charge.Activity.Service.Controller.Test.mocks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Razor.Language;
@@ -29,10 +30,14 @@ namespace Charge.Activity.Service.Controller.Test {
             
             var requestUri = "http://localhost:10002/api/ChargeActivity/add";            
             var content = GivenAHttpContent(identifier, requestUri);
+            IChargeActivityRepository repository = Substitute.For<IChargeActivityRepository>();
+            RepositoriesFactoryMock.CreateAddRepository(repository);
+            repository.Add(identifier.identifier).Returns(true);
 
             var result = await client.PostAsync(requestUri, content);
 
             result.StatusCode.Should().Be(HttpStatusCode.OK);
+            repository.Received(1).Add(identifier.identifier);
         }
 
         [Test]
