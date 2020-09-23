@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Charge.Activity.Service.Bussines.Dtos;
@@ -8,6 +9,7 @@ using Charge.Activity.Service.swagger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
+using Microsoft.Extensions.Configuration;
 
 namespace Charge.Activity.Service.Controllers {
     [Route("api/[controller]")]
@@ -43,6 +45,15 @@ namespace Charge.Activity.Service.Controllers {
                 return Ok();
             }
             throw new Exception("TODO");            
+        }
+
+        [Route("BBDD")]
+        [HttpGet]
+        public ActionResult<string> GetBBDD() {
+            IConfiguration configuration = new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.json", true, true)
+                    .Build();
+            return Ok(configuration.GetConnectionString("SqlFormacion"));            
         }
     }
 }
