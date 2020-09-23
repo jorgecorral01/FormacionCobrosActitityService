@@ -6,7 +6,8 @@ metadata:
     run: activityservice  
 spec:
   ports:
-  - port: 8090
+  - port: 80
     protocol: TCP
   selector:
     run: activityservice
+  type: NodePort
