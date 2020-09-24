@@ -3,6 +3,7 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /src
+WORKDIR /src
 
 COPY ["Charge.Activity.Service/Charge.Activity.Service.csproj", "Charge.Activity.Service/"]
 COPY ["Charge.Activity.Service.Actions/Charge.Activity.Service.Action.csproj", "Charge.Activity.Service.Actions/"]
