@@ -18,8 +18,7 @@ spec:
         run: activityservice
     spec:
       containers:
-      - image: jorgecorral/activitiservice:latest
-        imagePullPolicy: "IfNotPresent"
+      - image: jorgecorral/activitiservice:latest              
         name: activityservice
         ports:
           - containerPort: 80        
